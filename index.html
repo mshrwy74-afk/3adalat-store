@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3DLAT STORE | الملحمة الرياضية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo', sans-serif; scroll-behavior: smooth; background-color: #0f0f0f; color: white; }
+        .glass-nav { background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .hero-text { text-shadow: 0 0 20px rgba(234, 179, 8, 0.5); }
+        .product-card, .review-card { background: #1a1a1a; transition: 0.5s; border: 1px solid #222; overflow: hidden; }
+        .product-card:hover { transform: translateY(-10px); border-color: #eab308; }
+        .gradient-btn { background: linear-gradient(90deg, #eab308 0%, #ca8a04 100%); color: black; }
+        .hero-bg { 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80'); 
+            background-size: cover; background-position: center; 
+        }
+        /* بصمة المطور ياسين السباعي */
+        body::after { 
+            content: "Developed by: Yassin El-Sebaey Developer"; 
+            position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); 
+            font-size: 10px; text-transform: uppercase; color: rgba(255, 255, 255, 0.1); 
+            letter-spacing: 2px; z-index: 9999; pointer-events: none; 
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="glass-nav fixed w-full z-50 py-4 px-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-3xl font-black text-yellow-500 italic tracking-tighter">3DLAT<span class="text-white">STORE</span></div>
+            <div class="hidden md:flex gap-8 font-bold text-sm">
+                <a href="index.html" class="text-yellow-500">الرئيسية</a>
+                <a href="#products" class="hover:text-yellow-500 transition">المنتجات</a>
+                <a href="#reviews" class="hover:text-yellow-500 transition">آراء الأبطال</a>
+                <a href="checkout.html" class="hover:text-yellow-500 transition">إتمام الطلب</a>
+            </div>
+            <div class="text-2xl cursor-pointer"><a href="cart.html">🛒</a></div>
+        </div>
+    </nav>
+
+    <section class="hero-bg h-screen flex items-center justify-center relative">
+        <div class="relative z-10 text-center px-4" data-aos="zoom-in">
+            <h1 class="text-6xl md:text-8xl font-black hero-text mb-6 uppercase italic leading-none">تحدى <span class="text-yellow-500">حدودك</span></h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10 font-bold italic">أقوى المكملات العالمية الأصلية الآن في مصر.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#products" class="gradient-btn font-black px-12 py-4 rounded-full inline-block hover:shadow-[0_0_30px_rgba(234,179,8,0.4)] transition-all">تسوق الآن</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="container mx-auto py-24 px-6">
+        <div class="flex items-center gap-4 mb-16" data-aos="fade-left">
+            <div class="h-10 w-2 bg-yellow-500"></div>
+            <h2 class="text-4xl font-black italic uppercase tracking-tighter">أقوى العروض</h2>
+        </div>
+        <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            </div>
+    </section>
+
+    <section id="reviews" class="container mx-auto py-24 px-6 border-t border-white/5">
+        <div class="flex items-center gap-4 mb-16" data-aos="fade-right">
+            <div class="h-10 w-2 bg-yellow-500"></div>
+            <h2 class="text-4xl font-black italic uppercase tracking-tighter">آراء الوحوش</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="review-card p-8 rounded-3xl" data-aos="fade-up">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-black font-black">A</div>
+                    <div><h4 class="font-bold">أحمد علي</h4><p class="text-yellow-500 text-xs">★★★★★</p></div>
+                </div>
+                <p class="text-gray-400 italic">"الكرياتين أصلي والنتيجة ظهرت في أول أسبوعين. شكراً ع المصداقية."</p>
+            </div>
+            <div class="review-card p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center text-white font-black">M</div>
+                    <div><h4 class="font-bold">محمود جابر</h4><p class="text-yellow-500 text-xs">★★★★★</p></div>
+                </div>
+                <p class="text-gray-400 italic">"أحسن سعر في مصر وتوصيل سريع جداً. التغليف محترم."</p>
+            </div>
+            <div class="review-card p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-black font-black">S</div>
+                    <div><h4 class="font-bold">سعيد حسن</h4><p class="text-yellow-500 text-xs">★★★★★</p></div>
+                </div>
+                <p class="text-gray-400 italic">"الواي بروتين طعمه تحفة وبيذوب بسرعة. فعلاً مكملات عالمية."</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-white/5 py-12 text-center text-gray-500 italic bg-black">
+        <div class="text-2xl font-black text-yellow-500 mb-2">3DLAT STORE</div>
+        <p class="font-bold text-sm">© 2026 - جميع الحقوق محفوظة</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // --- [ لوحة تحكم ياسين ] ---
+        const myProducts = [
+            "كرياتين_بيج_رامي_60_جرعه_1000.jpg",
+            "كرياتين_رول_وان_75_جرعه_1300.jpg",
+            // الـ 46 مكان دول مخفيين تماماً ولن يظهروا للزبون إلا لو غيرت اسمهم
+            ...Array(45).fill("منتج_قريبا_000.jpg") 
+        ];
+
+        const container = document.getElementById('product-list');
+
+        myProducts.forEach((file, index) => {
+            let cleanName = file.split('.').slice(0, -1).join('.'); 
+            let parts = cleanName.split('_');
+            let price = parts.pop(); 
+            let name = parts.join(' '); 
+
+            // الحماية: لو الاسم لسه "منتج قريبا" لا تقم بإضافته للموقع
+            if (name.includes("منتج قريبا") || price === "000") {
+                return; 
+            }
+
+            container.innerHTML += `
+                <div class="product-card p-4 rounded-3xl group flex flex-col" data-aos="fade-up">
+                    <div class="relative h-80 rounded-2xl overflow-hidden bg-[#0a0a0a] flex items-center justify-center p-6">
+                        <img src="${file}" class="h-full object-contain transform group-hover:scale-110 transition duration-500" 
+                             onerror="this.src='https://via.placeholder.com/400x400/1a1a1a/eab308?text=IMAGE+ERROR'">
+                    </div>
+                    <div class="p-6 text-right flex-grow flex flex-col">
+                        <h3 class="text-xl font-black mb-4 uppercase italic tracking-tighter">${name}</h3>
+                        <div class="mt-auto flex items-center justify-between border-t border-white/5 pt-4">
+                            <span class="text-3xl font-black text-yellow-500">${price} <small class="text-xs">EGP</small></span>
+                            <button onclick="saveAndGo('${name}', '${price}', '${file}')" 
+                                    class="gradient-btn px-6 py-2 rounded-xl font-bold hover:scale-105 transition shadow-lg">
+                                🛒 اطلب
+                            </button>
+                        </div>
+                    </div>
+                </div>`;
+        });
+
+        function saveAndGo(name, price, img) {
+            localStorage.setItem('selectedProduct', name);
+            localStorage.setItem('selectedPrice', price);
+            localStorage.setItem('selectedImg', img);
+            window.location.href = 'product.html'; 
+        }
+    </script>
+</body>
+</html>
