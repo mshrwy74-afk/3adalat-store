@@ -17,9 +17,8 @@
         
         .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-left: 6px; }
         .dot-online { background-color: #22c55e; box-shadow: 0 0 10px #22c55e; }
-        .dot-offline { background-color: #ef4444; box-shadow: 0 0 10px #ef4444; }
-
-        .old-price { text-decoration: line-through; color: #666; font-size: 0.8rem; }
+        
+        .old-price { text-decoration: line-through; color: #ef4444; font-size: 0.85rem; opacity: 0.7; }
 
         .hero-bg { 
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80'); 
@@ -67,41 +66,36 @@
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        // مصفوفة المنتجات الكاملة (الاسم_السعرالأصلي)
-        const myProductsData = [
-            "أوبتيموم_نيوترشن_سيرياس_ماس_5.4_كيلو_4700",
-            "كيفن_لفروني_جولد_واي_2_كيلو_3600",
-            "نوفوجين_ماس_جينر_5.4_كيلو_2500",
-            "دايماتايز_أيزو_100_واي_بروتين_20_جرعة_2000",
-            "إيفولف_واي_بروتين_تارت_الفراولة_1_كيلو_2000",
-            "ريد_ريكيس_بيج_واي_1_كيلو_30_جرعة_1850",
-            "ريد_ريكس_أول_إن_بروتين_1300",
-            "باقة_دراجون_كرياتين_200_جرعة_سيترولين_75_1250",
-            "كريا_باور_كريابيور_80_جرعة_1225",
-            "دي_واي_نيوترشن_كرياتين_مونوهيدرات_60_جرعة_1100",
-            "باقة_تراكتور_كرياتين_80_جرعة_سيترولين_40_1000",
-            "ليبو_6_بلاك_ألترا_60_كبسولة_975",
+        // القائمة المحدثة بجميع المنتجات (الاسم_الجرعات_السعرالأصلي)
+        const allProducts = [
+            "كرياتين_انابوليك_الامريكي_60_جرعة_1000",
+            "باور_C4_الامريكي_30_جرعة_2200",
+            "كرياتين_ازجارد_نوردي_60_جرعة_1000",
+            "احماض_امينيه_EAA_بلس_30_جرعة_1300",
+            "واي_بروتين_ازجارد_60_جرعة_3500",
+            "ميز_انرجي_باور_30_جرعة_1200",
+            "كرياتين_اولمكس_الاصلي_60_جرعة_1700",
+            "سيرياس_ماس_اوبتيموم_50_جرعة_4700",
+            "كيفن_لفروني_جولد_واي_66_جرعة_3600",
+            "نوفوجين_ماس_جينر_50_جرعة_2500",
+            "دايماتايز_ايزو_100_20_جرعة_2000",
+            "دي_واي_نيوترشن_كرياتين_60_جرعة_1100",
+            "ليبو_6_بلاك_الترا_60_كبسولة_975",
             "ون_رو_كرياتين_100_جرعة_950",
-            "ريد_ريكس_بيج_رامي_لابس_كرياتين_60_جرعة_925",
-            "كريا_باور_كريابيور_50_جرعة_825",
-            "باقة_بيورجانيك_كرياتين_30_بيتا_ألانين_30_650",
-            "نوفوجين_سيترولين_مالات_850",
-            "نوفوجين_أر_جينين_90_تابلت_750",
-            "نوفوجين_بي_سي_ايه_ايه_1100",
-            "نوفوجين_جلوتامين_300_جرام_800",
-            "ألفا_مالتي_فيتامين_60_تابلت_550",
-            "نوفوجين_أوميجا_3_100_كبسولة_600",
-            "كوماندوز_هيل_فاير_كرياتين_40_جرعة_300"
+            "ريد_ريكس_بيج_رامي_كرياتين_60_جرعة_925",
+            "باقة_دراجون_توفير_عالي_1250",
+            "باقة_تراكتور_قوة_انفجارية_1000",
+            "كريا_باور_كريابيور_80_جرعة_1225"
         ];
 
         const container = document.getElementById('product-list');
 
-        myProductsData.forEach((item) => {
+        allProducts.forEach((item) => {
             let parts = item.split('_');
             let oldPrice = parseInt(parts.pop());
             let name = parts.join(' ');
             
-            // تطبيق الخصم (50 للغالي و 25 للرخيص)
+            // حساب الخصم (50 جنيه للغالي و 25 للرخيص)
             let discount = oldPrice > 1000 ? 50 : 25;
             let newPrice = oldPrice - discount;
 
@@ -109,21 +103,27 @@
                 <div class="product-card p-4 rounded-3xl group flex flex-col" data-aos="fade-up">
                     <div class="absolute top-6 right-6 z-10 flex items-center bg-black/60 px-3 py-1 rounded-full border border-white/10 backdrop-blur-sm">
                         <span class="status-dot dot-online"></span>
-                        <span class="text-[10px] font-black uppercase tracking-widest">متوفر</span>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-green-400">متوفر الآن</span>
                     </div>
                     
-                    <div class="relative h-80 rounded-2xl overflow-hidden bg-[#0a0a0a] flex items-center justify-center p-6">
+                    <div class="relative h-72 rounded-2xl overflow-hidden bg-[#0a0a0a] flex items-center justify-center p-6">
                         <img src="${item}.jpg" class="h-full object-contain transform group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/300?text=3DLAT+STORE'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
                     </div>
                     
                     <div class="p-6 text-right flex-grow flex flex-col">
                         <h3 class="text-xl font-black mb-4 uppercase italic tracking-tighter">${name}</h3>
-                        <div class="mt-auto flex items-center justify-between border-t border-white/5 pt-4">
-                            <div class="flex flex-col">
-                                <span class="old-price">${oldPrice} EGP</span>
-                                <span class="text-3xl font-black text-yellow-500">${newPrice} <small class="text-xs">EGP</small></span>
+                        <div class="mt-auto border-t border-white/5 pt-4">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex flex-col">
+                                    <span class="old-price">${oldPrice} EGP</span>
+                                    <span class="text-3xl font-black text-yellow-500">${newPrice} <small class="text-xs">EGP</small></span>
+                                </div>
+                                <div class="bg-yellow-500/10 border border-yellow-500/20 px-3 py-1 rounded-lg">
+                                    <span class="text-yellow-500 text-xs font-bold">وفر ${discount} ج</span>
+                                </div>
                             </div>
-                            <button onclick="saveAndGo('${name}', '${newPrice}', '${item}.jpg')" class="gradient-btn px-6 py-2 rounded-xl font-bold shadow-lg transform active:scale-95 transition">🛒 اطلب</button>
+                            <button onclick="saveAndGo('${name}', '${newPrice}', '${item}.jpg')" class="gradient-btn w-full py-3 rounded-xl font-bold shadow-lg transform active:scale-95 transition">🛒 اطلب الآن</button>
                         </div>
                     </div>
                 </div>`;
