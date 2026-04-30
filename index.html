@@ -15,12 +15,10 @@
         .product-card:hover { transform: translateY(-10px); border-color: #eab308; }
         .gradient-btn { background: linear-gradient(90deg, #eab308 0%, #ca8a04 100%); color: black; }
         
-        /* العلامات الخضراء والحمراء */
         .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-left: 6px; }
         .dot-online { background-color: #22c55e; box-shadow: 0 0 10px #22c55e; }
         .dot-offline { background-color: #ef4444; box-shadow: 0 0 10px #ef4444; }
 
-        /* رسالة قريبا بتنسيق اللوجو */
         .soon-msg {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             background: rgba(0,0,0,0.95); padding: 30px 60px; border: 2px solid #eab308;
@@ -75,12 +73,25 @@
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        // --- [ لوحة تحكم ياسين ] ---
+        // --- [ لوحة تحكم ياسين المحدثة بجميع المنتجات ] ---
         const myProducts = [
-            "كرياتين_بيج_رامي_60_جرعه_خلص_1000.jpg",
-            "كرياتين_رول_ون_خلص_1300.jpg", // كلمة "خلص" هتخلي العلامة حمراء
-            "تراكتور_الالماني_1200.jpeg",
-            ...Array(47).fill("منتج_قريبا_000.jpg")
+            "أوبتيموم_نيوترشن_سيرياس_ماس_5.4_كيلو_4650.jpg",
+            "كيفن_لفروني_جولد_واي_2_كيلو_3550.jpg",
+            "نوفوجين_ماس_جينر_5.4_كيلو_2450.jpg",
+            "دايماتايز_أيزو_100_واي_بروتين_20_جرعة_1950.jpg",
+            "إيفولف_واي_بروتين_تارت_الفراولة_1_كيلو_1950.jpg",
+            "ريد_ريكس_بيج_واي_1_كيلو_30_جرعة_1800.jpg",
+            "ريد_ريكس_أول_إن_بروتين_1250.jpg",
+            "باقة_دراجون_كرياتين_200_جرعة_سيترولين_75_1200.jpg",
+            "كريا_باور_كريابيور_80_جرعة_1175.jpg",
+            "دي_واي_نيوترشن_كرياتين_مونوهيدرات_60_جرعة_1050.jpg",
+            "باقة_تراكتور_كرياتين_80_جرعة_سيترولين_40_950.jpg",
+            "ليبو_6_بلاك_ألترا_60_كبسولة_925.jpg",
+            "ون_رو_كرياتين_100_جرعة_900.jpg",
+            "ريد_ريكس_بيج_رامي_لابس_كرياتين_60_جرعة_875.jpg",
+            "كريا_باور_كريابيور_50_جرعة_775.jpg",
+            "باقة_بيورجانيك_كرياتين_30_بيتا_ألانين_30_600.jpg",
+            "كوماندوز_هيل_فاير_كرياتين_40_جرعة_275.jpg"
         ];
 
         const container = document.getElementById('product-list');
@@ -93,7 +104,6 @@
 
             if (name.includes("منتج قريبا") || price === "000") return;
 
-            // تحديد الحالة بناءً على اسم الصورة
             const isOnline = !name.includes("خلص");
             const dotClass = isOnline ? "dot-online" : "dot-offline";
             const btnAction = isOnline ? `onclick="saveAndGo('${name}', '${price}', '${file}')"` : `onclick="showSoon()"`;
@@ -107,7 +117,7 @@
                     </div>
                     
                     <div class="relative h-80 rounded-2xl overflow-hidden bg-[#0a0a0a] flex items-center justify-center p-6">
-                        <img src="${file}" class="h-full object-contain transform group-hover:scale-110 transition duration-500">
+                        <img src="${file}" class="h-full object-contain transform group-hover:scale-110 transition duration-500" alt="${cleanDisplayName}">
                     </div>
                     
                     <div class="p-6 text-right flex-grow flex flex-col">
