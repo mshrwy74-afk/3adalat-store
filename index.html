@@ -15,24 +15,22 @@
         .product-card:hover { transform: translateY(-10px); border-color: #eab308; }
         .gradient-btn { background: linear-gradient(90deg, #eab308 0%, #ca8a04 100%); color: black; }
         
-        /* العلامات */
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-left: 5px; }
-        .dot-online { background: #22c55e; box-shadow: 0 0 10px #22c55e; }
-        .dot-offline { background: #ef4444; box-shadow: 0 0 10px #ef4444; }
+        .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-left: 6px; }
+        .dot-online { background-color: #22c55e; box-shadow: 0 0 10px #22c55e; }
+        .dot-offline { background-color: #ef4444; box-shadow: 0 0 10px #ef4444; }
 
-        /* رسالة قريبا */
-        .soon-msg {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.95); padding: 30px 60px; border: 2px solid #eab308;
-            z-index: 10000; border-radius: 20px; text-align: center; box-shadow: 0 0 50px rgba(234,179,8,0.4);
-        }
-        .soon-logo { font-weight: 900; font-style: italic; font-size: 2.5rem; letter-spacing: -2px; }
+        .old-price { text-decoration: line-through; color: #666; font-size: 0.8rem; }
 
         .hero-bg { 
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80'); 
             background-size: cover; background-position: center; 
         }
-        body::after { content: "Developed by: Yassin El-Sebaey"; position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); font-size: 10px; color: rgba(255, 255, 255, 0.1); z-index: 9999; }
+        body::after { 
+            content: "Developed by: Yassin El-Sebaey Developer"; 
+            position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); 
+            font-size: 10px; text-transform: uppercase; color: rgba(255, 255, 255, 0.1); 
+            letter-spacing: 2px; z-index: 9999; pointer-events: none; 
+        }
     </style>
 </head>
 <body>
@@ -40,89 +38,96 @@
     <nav class="glass-nav fixed w-full z-50 py-4 px-6">
         <div class="container mx-auto flex justify-between items-center">
             <div class="text-3xl font-black text-yellow-500 italic tracking-tighter">3DLAT<span class="text-white">STORE</span></div>
+            <div class="hidden md:flex gap-8 font-bold text-sm">
+                <a href="index.html" class="text-yellow-500">الرئيسية</a>
+                <a href="#products">المنتجات</a>
+                <a href="#reviews">آراء الأبطال</a>
+            </div>
             <div class="text-2xl cursor-pointer"><a href="cart.html">🛒</a></div>
         </div>
     </nav>
 
     <section class="hero-bg h-screen flex items-center justify-center relative px-4 text-center">
-        <div data-aos="zoom-in">
-            <h1 class="text-6xl md:text-8xl font-black hero-text mb-6 uppercase italic">تحدى <span class="text-yellow-500">حدودك</span></h1>
-            <p class="text-xl md:text-2xl text-gray-300 mb-10 font-bold italic text-yellow-500">3DLAT STORE | وحوش مصر</p>
-            <a href="#products" class="gradient-btn font-black px-12 py-4 rounded-full inline-block">تسوق العروض</a>
+        <div class="relative z-10" data-aos="zoom-in">
+            <h1 class="text-6xl md:text-8xl font-black hero-text mb-6 uppercase italic leading-none">تحدى <span class="text-yellow-500">حدودك</span></h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10 font-bold italic">أقوى المكملات العالمية الأصلية الآن في مصر.</p>
+            <a href="#products" class="gradient-btn font-black px-12 py-4 rounded-full inline-block">تسوق الآن</a>
         </div>
     </section>
 
     <section id="products" class="container mx-auto py-24 px-6">
+        <div class="flex items-center gap-4 mb-16" data-aos="fade-left">
+            <div class="h-10 w-2 bg-yellow-500"></div>
+            <h2 class="text-4xl font-black italic uppercase tracking-tighter">أقوى العروض</h2>
+        </div>
         <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
     </section>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1000 });
+        AOS.init({ duration: 1000, once: true });
 
-        // --- [ لوحة تحكم ياسين ] ---
-        // التنسيق: الاسم_الجرعات_السعرالجديد_السعرالقديم.jpg
-        const myProducts = [
-            "كرياتين_انابوليك_الامريكي_60_جرعة_1000_1250.jpg",
-            "باور_C4_30_جرعة_2200_2500.jpg",
-            "كرياتين_ازجارد_60_جرعة_1000_1200.jpg",
-            "احماض_امينيه_EAA_30_جرعة_1300_1500.jpg",
-            "واي_ازجارد_60_جرعة_3500_3900.png",
-            "ميز_30_جرعة_1200_1400.jpg",
-            "كرياتين_اولمكس_60_جرعة_1700_2000.jpg",
-            ...Array(43).fill("منتج_قريبا_000_000.jpg")
+        // مصفوفة المنتجات الكاملة (الاسم_السعرالأصلي)
+        const myProductsData = [
+            "أوبتيموم_نيوترشن_سيرياس_ماس_5.4_كيلو_4700",
+            "كيفن_لفروني_جولد_واي_2_كيلو_3600",
+            "نوفوجين_ماس_جينر_5.4_كيلو_2500",
+            "دايماتايز_أيزو_100_واي_بروتين_20_جرعة_2000",
+            "إيفولف_واي_بروتين_تارت_الفراولة_1_كيلو_2000",
+            "ريد_ريكيس_بيج_واي_1_كيلو_30_جرعة_1850",
+            "ريد_ريكس_أول_إن_بروتين_1300",
+            "باقة_دراجون_كرياتين_200_جرعة_سيترولين_75_1250",
+            "كريا_باور_كريابيور_80_جرعة_1225",
+            "دي_واي_نيوترشن_كرياتين_مونوهيدرات_60_جرعة_1100",
+            "باقة_تراكتور_كرياتين_80_جرعة_سيترولين_40_1000",
+            "ليبو_6_بلاك_ألترا_60_كبسولة_975",
+            "ون_رو_كرياتين_100_جرعة_950",
+            "ريد_ريكس_بيج_رامي_لابس_كرياتين_60_جرعة_925",
+            "كريا_باور_كريابيور_50_جرعة_825",
+            "باقة_بيورجانيك_كرياتين_30_بيتا_ألانين_30_650",
+            "نوفوجين_سيترولين_مالات_850",
+            "نوفوجين_أر_جينين_90_تابلت_750",
+            "نوفوجين_بي_سي_ايه_ايه_1100",
+            "نوفوجين_جلوتامين_300_جرام_800",
+            "ألفا_مالتي_فيتامين_60_تابلت_550",
+            "نوفوجين_أوميجا_3_100_كبسولة_600",
+            "كوماندوز_هيل_فاير_كرياتين_40_جرعة_300"
         ];
 
         const container = document.getElementById('product-list');
 
-        myProducts.forEach((file) => {
-            let cleanName = file.split('.').slice(0, -1).join('.'); 
-            let parts = cleanName.split('_');
+        myProductsData.forEach((item) => {
+            let parts = item.split('_');
+            let oldPrice = parseInt(parts.pop());
+            let name = parts.join(' ');
             
-            let oldPrice = parts.pop(); 
-            let newPrice = parts.pop();
-            let servings = parts.pop();
-            let name = parts.join(' '); 
-
-            if (name.includes("منتج قريبا")) return;
-
-            const isOnline = !name.includes("خلص");
-            const displayName = name.replace("خلص", "").trim();
+            // تطبيق الخصم (50 للغالي و 25 للرخيص)
+            let discount = oldPrice > 1000 ? 50 : 25;
+            let newPrice = oldPrice - discount;
 
             container.innerHTML += `
                 <div class="product-card p-4 rounded-3xl group flex flex-col" data-aos="fade-up">
-                    <div class="absolute top-6 right-6 z-10 flex items-center bg-black/60 px-3 py-1 rounded-full border border-white/10">
-                        <span class="status-dot ${isOnline ? 'dot-online' : 'dot-offline'}"></span>
-                        <span class="text-[10px] font-bold">${isOnline ? 'متوفر' : 'غير متوفر'}</span>
+                    <div class="absolute top-6 right-6 z-10 flex items-center bg-black/60 px-3 py-1 rounded-full border border-white/10 backdrop-blur-sm">
+                        <span class="status-dot dot-online"></span>
+                        <span class="text-[10px] font-black uppercase tracking-widest">متوفر</span>
                     </div>
                     
                     <div class="relative h-80 rounded-2xl overflow-hidden bg-[#0a0a0a] flex items-center justify-center p-6">
-                        <img src="${file}" class="h-full object-contain transform group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/400x400/1a1a1a/eab308?text=3DLAT+STORE'">
+                        <img src="${item}.jpg" class="h-full object-contain transform group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/300?text=3DLAT+STORE'">
                     </div>
                     
                     <div class="p-6 text-right flex-grow flex flex-col">
-                        <h3 class="text-xl font-black mb-1 italic tracking-tighter">${displayName}</h3>
-                        <p class="text-gray-500 text-sm mb-4 font-bold tracking-widest uppercase">${servings} SERVINGS</p>
-                        
+                        <h3 class="text-xl font-black mb-4 uppercase italic tracking-tighter">${name}</h3>
                         <div class="mt-auto flex items-center justify-between border-t border-white/5 pt-4">
                             <div class="flex flex-col">
-                                <span class="text-gray-600 line-through text-sm font-bold">${oldPrice} EGP</span>
+                                <span class="old-price">${oldPrice} EGP</span>
                                 <span class="text-3xl font-black text-yellow-500">${newPrice} <small class="text-xs">EGP</small></span>
                             </div>
-                            <button onclick="${isOnline ? `saveAndGo('${displayName}', '${newPrice}', '${file}')` : 'showSoon()'}" 
-                                    class="gradient-btn px-6 py-2 rounded-xl font-bold shadow-lg transform active:scale-95 transition">🛒 اطلب</button>
+                            <button onclick="saveAndGo('${name}', '${newPrice}', '${item}.jpg')" class="gradient-btn px-6 py-2 rounded-xl font-bold shadow-lg transform active:scale-95 transition">🛒 اطلب</button>
                         </div>
                     </div>
                 </div>`;
         });
-
-        function showSoon() {
-            const div = document.createElement('div');
-            div.className = 'soon-msg';
-            div.innerHTML = `<div class="soon-logo text-yellow-500">3DLAT<span class="text-white">STORE</span></div><div class="text-white font-black mt-4 text-xl italic uppercase">قريباً جداً !</div>`;
-            document.body.appendChild(div);
-            setTimeout(() => div.remove(), 2000);
-        }
 
         function saveAndGo(name, price, img) {
             localStorage.setItem('selectedProduct', name);
