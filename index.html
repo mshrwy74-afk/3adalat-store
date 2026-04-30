@@ -17,7 +17,6 @@
         
         .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-left: 6px; }
         .dot-online { background-color: #22c55e; box-shadow: 0 0 10px #22c55e; }
-        
         .old-price { text-decoration: line-through; color: #ef4444; font-size: 0.85rem; opacity: 0.7; }
 
         .hero-bg { 
@@ -57,28 +56,28 @@
     <section id="products" class="container mx-auto py-24 px-6">
         <div class="flex items-center gap-4 mb-16" data-aos="fade-left">
             <div class="h-10 w-2 bg-yellow-500"></div>
-            <h2 class="text-4xl font-black italic uppercase tracking-tighter">أقوى العروض (بودر)</h2>
+            <h2 class="text-4xl font-black italic uppercase tracking-tighter">أقوى العروض</h2>
         </div>
         <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
     </section>
 
-    <section id="reviews" class="container mx-auto py-24 px-6 bg-[#0a0a0a] rounded-[50px] mb-24">
-        <div class="text-center mb-16" data-aos="fade-up">
-            <h2 class="text-4xl font-black italic text-yellow-500 uppercase">آراء الأبطال</h2>
-            <p class="text-gray-400 mt-2">ثقة عملاء 3DLAT STORE هي سر قوتنا</p>
+    <section id="reviews" class="container mx-auto py-24 px-6 mb-24">
+        <div class="flex items-center gap-4 mb-16" data-aos="fade-left">
+            <div class="h-10 w-2 bg-yellow-500"></div>
+            <h2 class="text-4xl font-black italic uppercase tracking-tighter text-yellow-500">آراء الأبطال</h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="review-card p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="100">
+            <div class="review-card p-8 rounded-3xl" data-aos="fade-up">
                 <div class="text-yellow-500 mb-4 text-xl">⭐⭐⭐⭐⭐</div>
                 <p class="text-gray-300 italic mb-6">"أفضل تعامل ومنتجات أصلية فعلاً، الكرياتين فرق معايا جداً في التمرين والتوصيل كان سريع."</p>
                 <h4 class="font-bold text-white text-lg">- أحمد محمد</h4>
             </div>
-            <div class="review-card p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="200">
+            <div class="review-card p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="100">
                 <div class="text-yellow-500 mb-4 text-xl">⭐⭐⭐⭐⭐</div>
                 <p class="text-gray-300 italic mb-6">"جربت الواي بروتين الطعم ممتاز والنتائج بدأت تظهر، والخصومات اللي بيعملوها حقيقية."</p>
                 <h4 class="font-bold text-white text-lg">- محمود علي</h4>
             </div>
-            <div class="review-card p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="300">
+            <div class="review-card p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="200">
                 <div class="text-yellow-500 mb-4 text-xl">⭐⭐⭐⭐⭐</div>
                 <p class="text-gray-300 italic mb-6">"الباور C4 اللي أخدته أصلي 100%، شكراً لياسين على الاهتمام بجودة المكملات."</p>
                 <h4 class="font-bold text-white text-lg">- كابتن إسلام</h4>
@@ -90,28 +89,27 @@
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        const allProducts = [
-            "واي_بروتين_ازجارد_60_جرعة_3500_https://m.media-amazon.com/images/I/71Y8S4v8nJL._AC_SL1500_.jpg",
-            "كيفن_لفروني_جولد_واي_66_جرعة_3600_https://m.media-amazon.com/images/I/71XmCqP5LBL._AC_SL1500_.jpg",
-            "سيرياس_ماس_اوبتيموم_50_جرعة_4700_https://m.media-amazon.com/images/I/71nI6P-O8AL._AC_SL1500_.jpg",
-            "باور_C4_الامريكي_30_جرعة_2200_https://m.media-amazon.com/images/I/71X8k7R5l0L._AC_SL1500_.jpg",
-            "كرياتين_اولمكس_الاصلي_60_جرعة_1700_https://m.media-amazon.com/images/I/61mNnO0yHmL._AC_SL1200_.jpg",
-            "احماض_امينيه_EAA_بلس_30_جرعة_1300_https://m.media-amazon.com/images/I/71UjR7iE8xL._AC_SL1500_.jpg",
-            "كرياتين_انابوليك_الامريكي_60_جرعة_1000_https://m.media-amazon.com/images/I/61pWp9w8f0L._AC_SL1000_.jpg",
-            "كرياتين_ازجارد_نوردي_60_جرعة_1000_https://m.media-amazon.com/images/I/71EOnW1XhKL._AC_SL1500_.jpg",
-            "ميز_انرجي_باور_30_جرعة_1200_https://m.media-amazon.com/images/I/71X8k7R5l0L._AC_SL1500_.jpg",
-            "دايماتايز_ايزو_100_20_جرعة_2000_https://m.media-amazon.com/images/I/61X-N-2S4EL._AC_SL1000_.jpg",
-            "دي_واي_نيوترشن_كرياتين_60_جرعة_1100_https://m.media-amazon.com/images/I/61p-N-8S4EL._AC_SL1000_.jpg",
-            "نوفوجين_ماس_جينر_50_جرعة_2500_https://m.media-amazon.com/images/I/71nI6P-O8AL._AC_SL1500_.jpg"
+        // القائمة المحدثة بالكامل (بودر فقط)
+        const myProducts = [
+            "واي_بروتين_ازجارد_60_جرعة_3500",
+            "كيفن_لفروني_جولد_واي_66_جرعة_3600",
+            "سيرياس_ماس_اوبتيموم_50_جرعة_4700",
+            "باور_C4_الامريكي_30_جرعة_2200",
+            "كرياتين_اولمكس_الاصلي_60_جرعة_1700",
+            "احماض_امينيه_EAA_بلس_30_جرعة_1300",
+            "كرياتين_انابوليك_الامريكي_60_جرعة_1000",
+            "كرياتين_ازجارد_نوردي_60_جرعة_1000",
+            "ميز_انرجي_باور_30_جرعة_1200",
+            "دايماتايز_ايزو_100_20_جرعة_2000",
+            "دي_واي_نيوترشن_كرياتين_60_جرعة_1100",
+            "نوفوجين_ماس_جينر_50_جرعة_2500"
         ];
 
         const container = document.getElementById('product-list');
 
-        allProducts.forEach((item) => {
+        myProducts.forEach((item) => {
             let parts = item.split('_');
-            let imgSrc = parts.pop();
             let oldPrice = parseInt(parts.pop());
-            let servings = parts.pop();
             let name = parts.join(' ');
             
             let discount = oldPrice > 1500 ? 50 : 25;
@@ -123,12 +121,14 @@
                         <span class="status-dot dot-online"></span>
                         <span class="text-[10px] font-black uppercase tracking-widest text-green-400">متوفر</span>
                     </div>
+                    
                     <div class="relative h-72 rounded-2xl overflow-hidden bg-[#0a0a0a] flex items-center justify-center p-6">
-                        <img src="${imgSrc}" class="h-full object-contain transform group-hover:scale-110 transition duration-500">
+                        <img src="${item}.jpg" class="h-full object-contain transform group-hover:scale-110 transition duration-500" onerror="this.style.display='none'">
+                        <div class="text-yellow-500/20 font-black text-4xl absolute">3DLAT</div>
                     </div>
+                    
                     <div class="p-6 text-right flex-grow flex flex-col">
-                        <h3 class="text-xl font-black mb-1 uppercase italic tracking-tighter">${name}</h3>
-                        <p class="text-yellow-500 text-sm font-bold mb-4 italic">${servings}</p>
+                        <h3 class="text-xl font-black mb-4 uppercase italic tracking-tighter">${name}</h3>
                         <div class="mt-auto border-t border-white/5 pt-4">
                             <div class="flex items-center justify-between mb-4">
                                 <div class="flex flex-col">
@@ -139,11 +139,18 @@
                                     <span class="text-yellow-500 text-xs font-bold">خصم</span>
                                 </div>
                             </div>
-                            <button class="gradient-btn w-full py-3 rounded-xl font-bold shadow-lg transform active:scale-95 transition">🛒 اطلب الآن</button>
+                            <button onclick="saveAndGo('${name}', '${newPrice}', '${item}.jpg')" class="gradient-btn w-full py-3 rounded-xl font-bold shadow-lg transform active:scale-95 transition">🛒 اطلب</button>
                         </div>
                     </div>
                 </div>`;
         });
+
+        function saveAndGo(name, price, img) {
+            localStorage.setItem('selectedProduct', name);
+            localStorage.setItem('selectedPrice', price);
+            localStorage.setItem('selectedImg', img);
+            window.location.href = 'product.html'; 
+        }
     </script>
 </body>
 </html>
