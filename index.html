@@ -58,6 +58,7 @@
             <div class="h-10 w-2 bg-yellow-500"></div>
             <h2 class="text-4xl font-black italic uppercase tracking-tighter">أقوى العروض</h2>
         </div>
+        <!-- تم إضافة id="product-list" هنا ليتم تعبئته آلياً -->
         <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
     </section>
 
@@ -89,7 +90,7 @@
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        // القائمة المحدثة بالكامل (بودر فقط)
+        // مصفوفة المنتجات: أضف اسم الصورة هنا فقط (الاسم_الجرعات_السعر)
         const myProducts = [
             "واي_بروتين_ازجارد_60_جرعة_3500",
             "كيفن_لفروني_جولد_واي_66_جرعة_3600",
@@ -108,13 +109,16 @@
         const container = document.getElementById('product-list');
 
         myProducts.forEach((item) => {
+            // تقسيم الاسم لاستخراج السعر والاسم
             let parts = item.split('_');
-            let oldPrice = parseInt(parts.pop());
-            let name = parts.join(' ');
+            let oldPrice = parseInt(parts.pop()); // آخر جزء هو السعر
+            let name = parts.join(' '); // الباقي هو الاسم
             
+            // حساب الخصم التلقائي
             let discount = oldPrice > 1500 ? 50 : 25;
             let newPrice = oldPrice - discount;
 
+            // بناء الكارت وتعيين مسار الصورة تلقائياً باستخدام اسم العنصر + .jpg
             container.innerHTML += `
                 <div class="product-card p-4 rounded-3xl group flex flex-col" data-aos="fade-up">
                     <div class="absolute top-6 right-6 z-10 flex items-center bg-black/60 px-3 py-1 rounded-full border border-white/10 backdrop-blur-sm">
@@ -123,7 +127,7 @@
                     </div>
                     
                     <div class="relative h-72 rounded-2xl overflow-hidden bg-[#0a0a0a] flex items-center justify-center p-6">
-                        <img src="${item}.jpg" class="h-full object-contain transform group-hover:scale-110 transition duration-500" onerror="this.style.display='none'">
+                        <img src="${item}.jpg" class="h-full object-contain transform group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/300?text=3DLAT+STORE'">
                         <div class="text-yellow-500/20 font-black text-4xl absolute">3DLAT</div>
                     </div>
                     
