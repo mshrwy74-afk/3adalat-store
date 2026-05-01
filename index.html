@@ -3,16 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>3DLAT STORE | الملحمة الرياضية - مكملات غذائية أصلية</title>
-    <meta name="description" content="3DLAT STORE - المتجر الأول للمكملات الغذائية الأصلية في مصر. تحدى حدودك مع أقوى أنواع البروتين والكرياتين والباور بأفضل الأسعار.">
-    <meta name="keywords" content="3DLAT STORE, مكملات غذائية, بروتين, كرياتين, جيم, مكملات أصلية مصر, عضلات ستور">
-    <meta name="author" content="Yassin El-Sebaey Developer">
-
+    <title>3DLAT STORE | الملحمة الرياضية</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
     <style>
         body { font-family: 'Cairo', sans-serif; scroll-behavior: smooth; background-color: #0f0f0f; color: white; }
         .glass-nav { background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.05); }
@@ -25,13 +19,10 @@
         .dot-online { background-color: #22c55e; box-shadow: 0 0 10px #22c55e; }
         .old-price { text-decoration: line-through; color: #ef4444; font-size: 0.85rem; opacity: 0.7; }
 
-        /* خلفية الـ Hero باستخدام صورتك المرفوعة */
         .hero-bg { 
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(10,10,10,1)), url('1000297636.png'); 
-            background-size: cover; 
-            background-position: center; 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80'); 
+            background-size: cover; background-position: center; 
         }
-        
         body::after { 
             content: "Developed by: Yassin El-Sebaey Developer"; 
             position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); 
@@ -44,7 +35,7 @@
 
     <nav class="glass-nav fixed w-full z-50 py-4 px-6">
         <div class="container mx-auto flex justify-between items-center">
-            <div class="text-3xl font-black text-yellow-500 italic tracking-tighter">3DLAT<span class="text-white">SUPPLEMENTS</span></div>
+            <div class="text-3xl font-black text-yellow-500 italic tracking-tighter">3DLAT<span class="text-white">STORE</span></div>
             <div class="hidden md:flex gap-8 font-bold text-sm">
                 <a href="#" class="text-yellow-500">الرئيسية</a>
                 <a href="#products">المنتجات</a>
@@ -56,17 +47,16 @@
 
     <section class="hero-bg h-screen flex items-center justify-center relative px-4 text-center">
         <div class="relative z-10" data-aos="zoom-in">
-            <h1 class="text-5xl md:text-8xl font-black hero-text mb-6 uppercase italic leading-none">تحدى <span class="text-yellow-500">حدودك</span></h1>
-            <p class="text-xl md:text-2xl text-gray-300 mb-1 font-bold italic">مكملات 3DLAT Supplements الأصلية بالكامل.</p>
-            <p class="text-sm md:text-base text-gray-400 mb-10 tracking-widest uppercase">Premium Athletic Nutrition</p>
-            <a href="#products" class="gradient-btn font-black px-12 py-4 rounded-full inline-block uppercase tracking-wider">تسوق العروض الآن</a>
+            <h1 class="text-6xl md:text-8xl font-black hero-text mb-6 uppercase italic leading-none">تحدى <span class="text-yellow-500">حدودك</span></h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10 font-bold italic">أقوى المكملات العالمية الأصلية الآن في مصر.</p>
+            <a href="#products" class="gradient-btn font-black px-12 py-4 rounded-full inline-block">تسوق الآن</a>
         </div>
     </section>
 
     <section id="products" class="container mx-auto py-24 px-6">
         <div class="flex items-center gap-4 mb-16" data-aos="fade-left">
             <div class="h-10 w-2 bg-yellow-500"></div>
-            <h2 class="text-4xl font-black italic uppercase tracking-tighter">أقوى العروض (بودر)</h2>
+            <h2 class="text-4xl font-black italic uppercase tracking-tighter">أقوى العروض</h2>
         </div>
         <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
     </section>
@@ -99,7 +89,7 @@
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        // مصفوفة المنتجات (الاسم_الجرعات_السعرالأصلي)
+        // القائمة المحدثة بالكامل (بودر فقط)
         const myProducts = [
             "واي_بروتين_ازجارد_60_جرعة_3500",
             "كيفن_لفروني_جولد_واي_66_جرعة_3600",
@@ -146,10 +136,10 @@
                                     <span class="text-3xl font-black text-yellow-500">${newPrice} <small class="text-xs">EGP</small></span>
                                 </div>
                                 <div class="bg-yellow-500/10 border border-yellow-500/20 px-3 py-1 rounded-lg">
-                                    <span class="text-yellow-500 text-xs font-bold">عرض خاص</span>
+                                    <span class="text-yellow-500 text-xs font-bold">خصم</span>
                                 </div>
                             </div>
-                            <button onclick="saveAndGo('${name}', '${newPrice}', '${item}.jpg')" class="gradient-btn w-full py-3 rounded-xl font-bold shadow-lg transform active:scale-95 transition">🛒 اطلب العرض</button>
+                            <button onclick="saveAndGo('${name}', '${newPrice}', '${item}.jpg')" class="gradient-btn w-full py-3 rounded-xl font-bold shadow-lg transform active:scale-95 transition">🛒 اطلب</button>
                         </div>
                     </div>
                 </div>`;
