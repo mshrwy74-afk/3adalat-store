@@ -9,8 +9,10 @@
     <style>
         body { font-family: 'Cairo', sans-serif; background-color: #050505; color: white; min-height: 100vh; }
         input, textarea { background: #111 !important; border: 1px solid #222 !important; color: white !important; transition: 0.3s; width: 100%; }
-        input:focus, textarea:focus { border-color: #eab308 !important; outline: none; }
         .checkout-card { background: #0a0a0a; border: 1px solid #1a1a1a; }
+        /* أنيميشن بسيط لرسالة النجاح */
+        .success-animation { animation: scaleUp 0.5s ease-out; }
+        @keyframes scaleUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     </style>
 </head>
 <body class="pb-10">
@@ -19,8 +21,8 @@
         <a href="index.html" class="text-2xl font-black italic text-yellow-500">3DLAT<span class="text-white">STORE</span></a>
     </nav>
 
-    <div class="container mx-auto px-6 max-w-4xl">
-        <div class="flex flex-col lg:flex-row gap-10">
+    <div class="container mx-auto px-6 max-w-4xl" id="container-box">
+        <div id="order-ui" class="flex flex-col lg:flex-row gap-10">
             
             <!-- ملخص الطلب -->
             <div class="lg:w-1/3">
@@ -36,13 +38,11 @@
 
             <!-- استمارة البيانات -->
             <div class="lg:w-2/3">
-                <div class="checkout-card p-8 rounded-[2.5rem]">
+                <div class="checkout-card p-8 rounded-[2.5rem]" id="form-container">
                     <h1 class="text-3xl font-black mb-8 italic">بيانات <span class="text-yellow-500">الشحن</span></h1>
                     
-                    <!-- التعديل المطلوب: تم إضافة action و method -->
-                    <form action="https://formspree.io/f/xrejepwv" method="POST" class="space-y-6">
-                        
-                        <!-- إضافة حقل name لكل input -->
+                    <!-- قمنا بإزالة Action و Method لإدارتها عبر JS -->
+                    <form id="my-form" class="space-y-6">
                         <div>
                             <label class="block text-sm font-bold mb-2 text-gray-500 italic">الاسم بالكامل</label>
                             <input type="text" name="اسم_العميل" id="custName" required class="p-4 rounded-xl" placeholder="أدخل اسمك الثلاثي">
@@ -58,22 +58,21 @@
                             <textarea name="العنوان_التفصيلي" id="custAddress" required class="p-4 rounded-xl h-32" placeholder="المحافظة، المدينة، الشارع..."></textarea>
                         </div>
 
-                        <!-- حقول مخفية لإرسال بيانات المنتج التلقائية -->
                         <input type="hidden" name="المنتج_المطلوب" id="hiddenProduct">
                         <input type="hidden" name="سعر_المنتج" id="hiddenPrice">
 
-                        <button type="submit" class="w-full bg-yellow-500 text-black py-5 rounded-2xl font-black text-xl hover:bg-white transition duration-300 shadow-xl shadow-yellow-500/20">
+                        <button type="submit" id="submit-btn" class="w-full bg-yellow-500 text-black py-5 rounded-2xl font-black text-xl hover:bg-white transition duration-300">
                             تأكيد الطلب الآن 📦
                         </button>
+                        <p id="status" class="text-center mt-4 font-bold"></p>
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 
     <script>
-        // دالة لجلب بيانات المنتج من الصفحة السابقة (localStorage)
+        // 1. تحميل بيانات المنتج
         window.onload = function() {
             const name = localStorage.getItem('selectedProduct');
             const price = localStorage.getItem('selectedPrice');
@@ -83,12 +82,60 @@
                 document.getElementById('itemName').innerText = name;
                 document.getElementById('itemPrice').innerText = price;
                 document.getElementById('itemImg').src = img;
-                
-                // ملء الحقول المخفية لتصلك في الإيميل مع بيانات العميل
                 document.getElementById('hiddenProduct').value = name;
                 document.getElementById('hiddenPrice').value = price;
             }
         };
+
+        // 2. إدارة إرسال الفورم بدون تحويل الصفحة
+        var form = document.getElementById("my-form");
+        
+        async function handleSubmit(event) {
+            event.preventDefault();
+            var status = document.getElementById("status");
+            var btn = document.getElementById("submit-btn");
+            var data = new FormData(event.target);
+
+            btn.disabled = true;
+            btn.innerText = "جاري التأكيد... ⏳";
+
+            fetch("https://formspree.io/f/xrejepwv", {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // إخفاء الواجهة القديمة وإظهار رسالة النجاح
+                    document.getElementById('order-ui').innerHTML = `
+                        <div class="w-full text-center py-20 success-animation">
+                            <div class="inline-block bg-yellow-500 text-black rounded-full p-6 mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <h2 class="text-4xl font-black text-yellow-500 mb-4 italic">تم تأكيد طلبك بنجاح! ✅</h2>
+                            <p class="text-xl text-gray-300 italic mb-8">شكراً لثقتك في 3DLAT STORE، سيتواصل معك أحد ممثلينا قريباً.</p>
+                            <a href="index.html" class="bg-white text-black px-12 py-4 rounded-2xl font-black hover:bg-yellow-500 transition">العودة للمتجر</a>
+                        </div>
+                    `;
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                        } else {
+                            status.innerHTML = "❌ عذراً! حدثت مشكلة في الإرسال.";
+                        }
+                    })
+                }
+            }).catch(error => {
+                status.innerHTML = "❌ تأكد من اتصالك بالإنترنت وحاول مجدداً.";
+                btn.disabled = false;
+                btn.innerText = "تأكيد الطلب الآن 📦";
+            });
+        }
+        form.addEventListener("submit", handleSubmit)
     </script>
 </body>
 </html>
