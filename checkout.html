@@ -12,23 +12,20 @@
         input:focus, textarea:focus { border-color: #eab308 !important; outline: none; box-shadow: 0 0 10px rgba(234, 179, 8, 0.1); }
         .checkout-card { background: #0a0a0a; border: 1px solid #1a1a1a; }
         .error-msg { color: #ef4444; font-size: 0.75rem; margin-top: 0.25rem; display: none; }
-        .watermark { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); font-size: 10px; text-transform: uppercase; color: rgba(255, 255, 255, 0.1); letter-spacing: 2px; pointer-events: none; z-index: 99; }
     </style>
 </head>
 <body class="pb-10">
 
-    <nav class="p-6 border-b border-white/5 mb-10">
-        <div class="container mx-auto text-center md:text-right">
-            <a href="index.html" class="text-2xl font-black italic text-yellow-500">3DLAT<span class="text-white">STORE</span></a>
-        </div>
+    <nav class="p-6 border-b border-white/5 mb-10 text-center">
+        <a href="index.html" class="text-2xl font-black italic text-yellow-500">3DLAT<span class="text-white">STORE</span></a>
     </nav>
 
     <div class="container mx-auto px-6 max-w-4xl">
-        <div class="flex flex-col lg:flex-row gap-10">
+        <div id="main-content" class="flex flex-col lg:flex-row gap-10">
             
             <!-- ملخص الطلب -->
-            <div class="lg:w-1/3 order-2 lg:order-1">
-                <div class="checkout-card p-6 rounded-[2rem] sticky top-24">
+            <div class="lg:w-1/3">
+                <div class="checkout-card p-6 rounded-[2rem]">
                     <h2 class="text-xl font-black mb-6 border-b border-white/5 pb-4 italic">ملخص الطلب</h2>
                     <div class="text-center">
                         <img id="itemImg" src="" class="h-40 w-full object-contain mb-4 bg-black rounded-2xl p-4 border border-white/5">
@@ -39,43 +36,35 @@
             </div>
 
             <!-- استمارة البيانات -->
-            <div class="lg:w-2/3 order-1 lg:order-2">
-                <div class="checkout-card p-8 rounded-[2.5rem] shadow-2xl shadow-yellow-500/5">
+            <div class="lg:w-2/3">
+                <div class="checkout-card p-8 rounded-[2.5rem]">
                     <h1 class="text-3xl font-black mb-8 italic">بيانات <span class="text-yellow-500">الشحن</span></h1>
                     
-                    <form onsubmit="validateAndSend(event)" class="space-y-6">
-                        <!-- الاسم -->
+                    <form id="orderForm" onsubmit="handleOrder(event)" class="space-y-6">
                         <div>
-                            <label class="block text-sm font-bold mb-2 text-gray-500 italic">الاسم بالكامل (ثلاثي على الأقل)</label>
-                            <input type="text" id="custName" required class="p-4 rounded-xl" placeholder="محمد أحمد علي">
-                            <p id="nameError" class="error-msg">⚠️ يرجى إدخال الاسم ثلاثياً بشكل صحيح.</p>
+                            <label class="block text-sm font-bold mb-2 text-gray-500 italic">الاسم بالكامل (ثلاثي)</label>
+                            <input type="text" name="الاسم" id="custName" required class="p-4 rounded-xl">
+                            <p id="nameError" class="error-msg">⚠️ يرجى إدخال اسم ثلاثي صحيح.</p>
                         </div>
 
-                        <!-- الموبايل -->
                         <div>
-                            <label class="block text-sm font-bold mb-2 text-gray-500 italic">رقم الموبايل (11 رقم)</label>
-                            <input type="tel" id="custPhone" required class="p-4 rounded-xl" placeholder="01xxxxxxxxx">
-                            <p id="phoneError" class="error-msg">⚠️ يرجى إدخال رقم موبايل مصري صحيح (11 رقم).</p>
+                            <label class="block text-sm font-bold mb-2 text-gray-500 italic">رقم الموبايل</label>
+                            <input type="tel" name="الموبايل" id="custPhone" required class="p-4 rounded-xl">
+                            <p id="phoneError" class="error-msg">⚠️ رقم موبايل غير صحيح.</p>
                         </div>
 
-                        <!-- العنوان -->
                         <div>
-                            <label class="block text-sm font-bold mb-2 text-gray-500 italic">العنوان بالتفصيل (أكثر من 50 حرف)</label>
-                            <textarea id="custAddress" required class="p-4 rounded-xl h-32" placeholder="المحافظة، المدينة، اسم الشارع، رقم المبنى، علامة مميزة..."></textarea>
-                            <p id="addressError" class="error-msg">⚠️ العنوان قصير جداً، يرجى كتابة العنوان بالتفصيل (50 حرف على الأقل).</p>
+                            <label class="block text-sm font-bold mb-2 text-gray-500 italic">العنوان بالتفصيل الممل</label>
+                            <textarea name="العنوان" id="custAddress" required class="p-4 rounded-xl h-32"></textarea>
+                            <p id="addressError" class="error-msg">⚠️ يرجى كتابة عنوان مفصل (أكثر من 50 حرف).</p>
                         </div>
 
-                        <!-- الدفع -->
-                        <div>
-                            <label class="block text-sm font-bold mb-2 text-gray-500 italic">طريقة الدفع</label>
-                            <select id="payMethod" class="p-4 rounded-xl">
-                                <option value="الدفع عند الاستلام">الدفع عند الاستلام (COD)</option>
-                                <option value="تحويل محفظة">فودافون كاش / محفظة إلكترونية</option>
-                            </select>
-                        </div>
+                        <!-- حقول مخفية للمنتج -->
+                        <input type="hidden" name="المنتج" id="hiddenProduct">
+                        <input type="hidden" name="السعر" id="hiddenPrice">
 
-                        <button type="submit" class="w-full bg-yellow-500 text-black py-5 rounded-2xl font-black text-xl hover:bg-white hover:scale-[1.02] transition duration-300 shadow-xl shadow-yellow-500/20">
-                            تأكيد الطلب عبر الواتساب 🚀
+                        <button type="submit" id="submitBtn" class="w-full bg-yellow-500 text-black py-5 rounded-2xl font-black text-xl hover:bg-white transition duration-300">
+                            تأكيد الطلب الآن 📦
                         </button>
                     </form>
                 </div>
@@ -84,9 +73,8 @@
         </div>
     </div>
 
-    <div class="watermark">Developed by: Yassin El-Sebaey Developer</div>
-
     <script>
+        // تحميل بيانات المنتج من localStorage
         window.onload = function() {
             const name = localStorage.getItem('selectedProduct');
             const price = localStorage.getItem('selectedPrice');
@@ -95,62 +83,57 @@
             if (name && price) {
                 document.getElementById('itemName').innerText = name;
                 document.getElementById('itemPrice').innerText = price;
-                document.getElementById('itemImg').src = img || 'placeholder.jpg';
-            } else {
-                window.location.href = 'index.html';
+                document.getElementById('itemImg').src = img;
+                document.getElementById('hiddenProduct').value = name;
+                document.getElementById('hiddenPrice').value = price;
             }
         };
 
-        function validateAndSend(event) {
+        async function handleOrder(event) {
             event.preventDefault();
-            
-            // جلب القيم
+            const btn = document.getElementById('submitBtn');
             const name = document.getElementById('custName').value.trim();
             const phone = document.getElementById('custPhone').value.trim();
             const address = document.getElementById('custAddress').value.trim();
-            const method = document.getElementById('payMethod').value;
-            const product = localStorage.getItem('selectedProduct');
-            const price = localStorage.getItem('selectedPrice');
 
-            // إخفاء رسائل الخطأ
-            document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
+            // التحقق من البيانات
+            let valid = true;
+            document.querySelectorAll('.error-msg').forEach(e => e.style.display = 'none');
 
-            let isValid = true;
+            if (name.split(/\s+/).length < 3) { document.getElementById('nameError').style.display = 'block'; valid = false; }
+            if (!/^(010|011|012|015)[0-9]{8}$/.test(phone)) { document.getElementById('phoneError').style.display = 'block'; valid = false; }
+            if (address.length < 50) { document.getElementById('addressError').style.display = 'block'; valid = false; }
 
-            // 1. فحص الاسم (يجب أن يكون ثلاثي على الأقل)
-            const nameParts = name.split(/\s+/);
-            if (nameParts.length < 3) {
-                document.getElementById('nameError').style.display = 'block';
-                isValid = false;
-            }
+            if (!valid) return;
 
-            // 2. فحص الهاتف (رقم مصري 11 رقم)
-            const phoneRegex = /^(010|011|012|015)[0-9]{8}$/;
-            if (!phoneRegex.test(phone)) {
-                document.getElementById('phoneError').style.display = 'block';
-                isValid = false;
-            }
+            // إرسال البيانات
+            btn.disabled = true;
+            btn.innerText = "جاري إرسال طلبك... ⏳";
 
-            // 3. فحص العنوان (50 حرف على الأقل)
-            if (address.length < 50) {
-                document.getElementById('addressError').style.display = 'block';
-                isValid = false;
-            }
+            const formData = new FormData(event.target);
 
-            if (isValid) {
-                const myNumber = "201200000000"; // استبدله برقمك الحقيقي يا ياسين
-                
-                const message = `🚨 *طلب جديد من 3DLAT STORE* 🚨\n\n` +
-                                `📦 *المنتج:* ${product}\n` +
-                                `💰 *السعر:* ${price} ج.م\n\n` +
-                                `👤 *العميل:* ${name}\n` +
-                                `📞 *الموبايل:* ${phone}\n` +
-                                `📍 *العنوان:* ${address}\n` +
-                                `💳 *طريقة الدفع:* ${method}\n\n` +
-                                `⚡ _تم التحقق من البيانات آلياً_`;
+            try {
+                const response = await fetch('https://formspree.io/f/xrejepwv', {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
 
-                const waUrl = `https://wa.me/${myNumber}?text=${encodeURIComponent(message)}`;
-                window.open(waUrl, '_blank');
+                if (response.ok) {
+                    document.getElementById('main-content').innerHTML = `
+                        <div class="w-full text-center py-20">
+                            <h2 class="text-4xl font-black text-yellow-500 mb-4 italic">تم بنجاح! ✅</h2>
+                            <p class="text-xl">وصلنا طلبك يا بطل، سنقوم بالتواصل معك قريباً.</p>
+                            <a href="index.html" class="mt-8 inline-block bg-white text-black px-10 py-3 rounded-xl font-bold">العودة للرئيسية</a>
+                        </div>
+                    `;
+                } else {
+                    alert("خطأ في الإرسال، حاول مرة أخرى.");
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                alert("تأكد من اتصالك بالإنترنت.");
+                btn.disabled = false;
             }
         }
     </script>
