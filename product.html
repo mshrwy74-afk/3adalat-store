@@ -2,44 +2,63 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3DLAT STORE | تفاصيل المنتج</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>body { font-family: 'Cairo', sans-serif; background-color: #050505; color: white; }</style>
 </head>
 <body>
-    <nav class="p-6 border-b border-white/5"><a href="index.html" class="text-yellow-500 font-black">3DLAT STORE</a></nav>
+    <nav class="p-6 border-b border-white/5 bg-black/50 backdrop-blur-md sticky top-0 z-50">
+        <a href="index.html" class="text-yellow-500 font-black text-2xl italic">3DLAT STORE</a>
+    </nav>
 
-    <div class="container mx-auto py-20 px-6">
-        <div class="flex flex-col md:flex-row gap-12 bg-[#0a0a0a] p-10 rounded-[40px] border border-white/5">
-            <div class="md:w-1/2 bg-black p-10 rounded-3xl">
-                <img id="mainImg" src="" class="w-full h-80 object-contain">
+    <div class="container mx-auto py-12 md:py-20 px-6">
+        <div class="flex flex-col lg:flex-row gap-12 bg-[#0a0a0a] p-6 md:p-12 rounded-[40px] border border-white/5">
+            <!-- الصورة المعدلة -->
+            <div class="lg:w-1/2 bg-black/50 p-6 md:p-12 rounded-3xl flex items-center justify-center border border-white/5 shadow-inner">
+                <img id="mainImg" src="" class="w-full max-h-[400px] object-contain drop-shadow-[0_0_30px_rgba(234,179,8,0.2)]">
             </div>
-            <div class="md:w-1/2">
-                <h1 id="prodName" class="text-5xl font-black mb-6 italic text-yellow-500">جاري التحميل...</h1>
-                <p class="text-gray-400 text-lg mb-8">هذا المنتج أصلي ومضمون 100% من متجر عضلات ستور.</p>
-                <div class="text-4xl font-black mb-10"><span id="prodPrice">0</span> ج.م</div>
-                <a href="checkout.html" class="block text-center bg-white text-black py-5 rounded-2xl font-black text-xl hover:bg-yellow-500 transition">إتمام عملية الشراء</a>
+            
+            <div class="lg:w-1/2 flex flex-col justify-center text-right">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="bg-green-500/10 text-green-400 text-[10px] font-black px-3 py-1 rounded-full border border-green-500/20 uppercase">أصلي 100%</span>
+                    <span class="bg-yellow-500/10 text-yellow-500 text-[10px] font-black px-3 py-1 rounded-full border border-yellow-500/20">مسجل بسلامة الغذاء</span>
+                </div>
+                <h1 id="prodName" class="text-4xl md:text-6xl font-black mb-6 italic text-yellow-500 leading-tight">جاري التحميل...</h1>
+                <p class="text-gray-400 text-lg mb-8 leading-relaxed">هذا المنتج تم فحصه بعناية، أصلي ومسجل لدى الهيئة القومية لسلامة الغذاء. نضمن لك النقاء الكامل وأفضل نتائج لتمرينك.</p>
+                
+                <div class="flex items-end gap-4 mb-10">
+                    <span id="prodPrice" class="text-5xl font-black text-white">0</span>
+                    <span class="text-xl text-gray-500 mb-2 font-bold uppercase italic">EGP</span>
+                </div>
+
+                <div class="space-y-4">
+                    <a href="checkout.html" class="block text-center bg-yellow-500 text-black py-5 rounded-2xl font-black text-xl hover:scale-[1.02] transition shadow-[0_10px_20px_rgba(234,179,8,0.3)]">إتمام عملية الشراء</a>
+                    <a href="index.html" class="block text-center border border-white/10 text-white py-4 rounded-2xl font-bold hover:bg-white/5 transition">العودة للمتجر</a>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // الكود اللي بيغير المحتوى حسب المنتج اللي ضغطت عليه
         window.onload = function() {
             const name = localStorage.getItem('selectedProduct');
             const price = localStorage.getItem('selectedPrice');
+            const imgPath = localStorage.getItem('selectedImg');
 
             if (name && price) {
                 document.getElementById('prodName').innerText = name;
                 document.getElementById('prodPrice').innerText = price;
                 
-                // تغيير الصورة بناءً على الاسم (شرط بسيط)
                 const img = document.getElementById('mainImg');
-                if (name.includes("رول ون")) {
-                    img.src = "https://i.ibb.co/3T9hFzV/1000294714.jpg";
-                } else {
-                    img.src = "https://i.ibb.co/LDP7f6z/1000294715.jpg";
-                }
+                // إذا كان المسار المخزن موجود نستخدمه، وإلا نستخدم البليس هولدر
+                img.src = imgPath ? imgPath : "https://via.placeholder.com/400?text=3DLAT+STORE";
+                
+                // إضافة معالجة خطأ للصورة في حال لم تكن موجودة
+                img.onerror = function() {
+                    this.src = "https://via.placeholder.com/400?text=3DLAT+STORE";
+                };
             }
         };
     </script>
