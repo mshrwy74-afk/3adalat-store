@@ -8,10 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Cairo', sans-serif; background-color: #050505; color: white; min-height: 100vh; }
-        input, select, textarea { background: #111 !important; border: 1px solid #222 !important; color: white !important; transition: 0.3s; width: 100%; }
-        input:focus, textarea:focus { border-color: #eab308 !important; outline: none; box-shadow: 0 0 10px rgba(234, 179, 8, 0.1); }
+        input, textarea { background: #111 !important; border: 1px solid #222 !important; color: white !important; transition: 0.3s; width: 100%; }
+        input:focus, textarea:focus { border-color: #eab308 !important; outline: none; }
         .checkout-card { background: #0a0a0a; border: 1px solid #1a1a1a; }
-        .error-msg { color: #ef4444; font-size: 0.75rem; margin-top: 0.25rem; display: none; }
     </style>
 </head>
 <body class="pb-10">
@@ -21,7 +20,7 @@
     </nav>
 
     <div class="container mx-auto px-6 max-w-4xl">
-        <div id="main-content" class="flex flex-col lg:flex-row gap-10">
+        <div class="flex flex-col lg:flex-row gap-10">
             
             <!-- ملخص الطلب -->
             <div class="lg:w-1/3">
@@ -40,30 +39,30 @@
                 <div class="checkout-card p-8 rounded-[2.5rem]">
                     <h1 class="text-3xl font-black mb-8 italic">بيانات <span class="text-yellow-500">الشحن</span></h1>
                     
-                    <form id="orderForm" onsubmit="handleOrder(event)" class="space-y-6">
+                    <!-- التعديل المطلوب: تم إضافة action و method -->
+                    <form action="https://formspree.io/f/xrejepwv" method="POST" class="space-y-6">
+                        
+                        <!-- إضافة حقل name لكل input -->
                         <div>
-                            <label class="block text-sm font-bold mb-2 text-gray-500 italic">الاسم بالكامل (ثلاثي)</label>
-                            <input type="text" name="الاسم" id="custName" required class="p-4 rounded-xl">
-                            <p id="nameError" class="error-msg">⚠️ يرجى إدخال اسم ثلاثي صحيح.</p>
+                            <label class="block text-sm font-bold mb-2 text-gray-500 italic">الاسم بالكامل</label>
+                            <input type="text" name="اسم_العميل" id="custName" required class="p-4 rounded-xl" placeholder="أدخل اسمك الثلاثي">
                         </div>
 
                         <div>
                             <label class="block text-sm font-bold mb-2 text-gray-500 italic">رقم الموبايل</label>
-                            <input type="tel" name="الموبايل" id="custPhone" required class="p-4 rounded-xl">
-                            <p id="phoneError" class="error-msg">⚠️ رقم موبايل غير صحيح.</p>
+                            <input type="tel" name="رقم_الهاتف" id="custPhone" required class="p-4 rounded-xl" placeholder="01xxxxxxxxx">
                         </div>
 
                         <div>
-                            <label class="block text-sm font-bold mb-2 text-gray-500 italic">العنوان بالتفصيل الممل</label>
-                            <textarea name="العنوان" id="custAddress" required class="p-4 rounded-xl h-32"></textarea>
-                            <p id="addressError" class="error-msg">⚠️ يرجى كتابة عنوان مفصل (أكثر من 50 حرف).</p>
+                            <label class="block text-sm font-bold mb-2 text-gray-500 italic">العنوان بالتفصيل</label>
+                            <textarea name="العنوان_التفصيلي" id="custAddress" required class="p-4 rounded-xl h-32" placeholder="المحافظة، المدينة، الشارع..."></textarea>
                         </div>
 
-                        <!-- حقول مخفية للمنتج -->
-                        <input type="hidden" name="المنتج" id="hiddenProduct">
-                        <input type="hidden" name="السعر" id="hiddenPrice">
+                        <!-- حقول مخفية لإرسال بيانات المنتج التلقائية -->
+                        <input type="hidden" name="المنتج_المطلوب" id="hiddenProduct">
+                        <input type="hidden" name="سعر_المنتج" id="hiddenPrice">
 
-                        <button type="submit" id="submitBtn" class="w-full bg-yellow-500 text-black py-5 rounded-2xl font-black text-xl hover:bg-white transition duration-300">
+                        <button type="submit" class="w-full bg-yellow-500 text-black py-5 rounded-2xl font-black text-xl hover:bg-white transition duration-300 shadow-xl shadow-yellow-500/20">
                             تأكيد الطلب الآن 📦
                         </button>
                     </form>
@@ -74,7 +73,7 @@
     </div>
 
     <script>
-        // تحميل بيانات المنتج من localStorage
+        // دالة لجلب بيانات المنتج من الصفحة السابقة (localStorage)
         window.onload = function() {
             const name = localStorage.getItem('selectedProduct');
             const price = localStorage.getItem('selectedPrice');
@@ -84,58 +83,12 @@
                 document.getElementById('itemName').innerText = name;
                 document.getElementById('itemPrice').innerText = price;
                 document.getElementById('itemImg').src = img;
+                
+                // ملء الحقول المخفية لتصلك في الإيميل مع بيانات العميل
                 document.getElementById('hiddenProduct').value = name;
                 document.getElementById('hiddenPrice').value = price;
             }
         };
-
-        async function handleOrder(event) {
-            event.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            const name = document.getElementById('custName').value.trim();
-            const phone = document.getElementById('custPhone').value.trim();
-            const address = document.getElementById('custAddress').value.trim();
-
-            // التحقق من البيانات
-            let valid = true;
-            document.querySelectorAll('.error-msg').forEach(e => e.style.display = 'none');
-
-            if (name.split(/\s+/).length < 3) { document.getElementById('nameError').style.display = 'block'; valid = false; }
-            if (!/^(010|011|012|015)[0-9]{8}$/.test(phone)) { document.getElementById('phoneError').style.display = 'block'; valid = false; }
-            if (address.length < 50) { document.getElementById('addressError').style.display = 'block'; valid = false; }
-
-            if (!valid) return;
-
-            // إرسال البيانات
-            btn.disabled = true;
-            btn.innerText = "جاري إرسال طلبك... ⏳";
-
-            const formData = new FormData(event.target);
-
-            try {
-                const response = await fetch('https://formspree.io/f/xrejepwv', {
-                    method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
-
-                if (response.ok) {
-                    document.getElementById('main-content').innerHTML = `
-                        <div class="w-full text-center py-20">
-                            <h2 class="text-4xl font-black text-yellow-500 mb-4 italic">تم بنجاح! ✅</h2>
-                            <p class="text-xl">وصلنا طلبك يا بطل، سنقوم بالتواصل معك قريباً.</p>
-                            <a href="index.html" class="mt-8 inline-block bg-white text-black px-10 py-3 rounded-xl font-bold">العودة للرئيسية</a>
-                        </div>
-                    `;
-                } else {
-                    alert("خطأ في الإرسال، حاول مرة أخرى.");
-                    btn.disabled = false;
-                }
-            } catch (err) {
-                alert("تأكد من اتصالك بالإنترنت.");
-                btn.disabled = false;
-            }
-        }
     </script>
 </body>
 </html>
