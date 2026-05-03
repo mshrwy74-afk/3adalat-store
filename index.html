@@ -14,21 +14,27 @@
         .product-card { background: #1a1a1a; transition: 0.5s; border: 1px solid #222; overflow: hidden; position: relative; }
         .product-card:hover { transform: translateY(-10px); border-color: #eab308; }
         .gradient-btn { background: linear-gradient(90deg, #eab308 0%, #ca8a04 100%); color: black; }
+        
+        /* استايل السلايدر المطور */
+        .hero-bg { position: relative; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 0.8s ease-in-out; z-index: -1; }
+        .hero-slide.active { opacity: 1; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)); z-index: 0; }
+        .hero-content { z-index: 10; position: relative; }
+
         .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-left: 6px; }
         .dot-online { background-color: #22c55e; box-shadow: 0 0 10px #22c55e; }
         .old-price { text-decoration: line-through; color: #ef4444; font-size: 0.85rem; opacity: 0.7; }
-        .hero-bg { background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; }
+        
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.5); z-index: 100; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s; }
         .whatsapp-float:hover { transform: scale(1.1); }
-        .watermark { position: fixed; bottom: 10px; left: 10px; font-size: 10px; text-transform: uppercase; color: rgba(255, 255, 255, 0.1); letter-spacing: 2px; pointer-events: none; z-index: 99; font-family: sans-serif; }
+        .watermark { position: fixed; bottom: 10px; left: 10px; font-size: 10px; text-transform: uppercase; color: rgba(255, 255, 255, 0.15); letter-spacing: 2px; pointer-events: none; z-index: 99; font-family: sans-serif; }
     </style>
 </head>
 <body>
 
-    <!-- العلامة المائية بالفرانكو المظبوط -->
     <div class="watermark">Dev: Yassin ElSeba3e | 01550434880</div>
 
-    <!-- Navigation -->
     <nav class="glass-nav fixed w-full z-50 py-4 px-6">
         <div class="container mx-auto flex justify-between items-center">
             <div class="text-3xl font-black text-yellow-500 italic tracking-tighter">3DLAT<span class="text-white">STORE</span></div>
@@ -41,37 +47,39 @@
         </div>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero-bg h-screen flex items-center justify-center text-center px-4">
-        <div data-aos="zoom-in">
+    <section id="hero" class="hero-bg px-4">
+        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80')"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1920&q=80')"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1581009146145-b5ef03a7403f?auto=format&fit=crop&w=1920&q=80')"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content" data-aos="zoom-in">
             <h1 class="text-6xl md:text-8xl font-black mb-6 italic uppercase leading-none">تحدى <span class="text-yellow-500">حدودك</span></h1>
             <p class="text-xl md:text-2xl text-gray-300 mb-10 font-bold italic">مكملات عالمية أصلية مسجلة بسلامة الغذاء 🛡️</p>
-            <a href="#products" class="gradient-btn font-black px-12 py-4 rounded-full inline-block shadow-lg">تسوق العروض الآن</a>
+            <a href="#products" class="gradient-btn font-black px-12 py-4 rounded-full inline-block shadow-lg uppercase tracking-tighter">تسوق العروض الآن</a>
         </div>
     </section>
 
-    <!-- Features Section -->
     <section id="about" class="bg-[#0a0a0a] py-20 px-6 border-y border-white/5">
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
             <div data-aos="fade-up">
                 <i class="fas fa-certificate text-4xl text-yellow-500 mb-4"></i>
-                <h3 class="text-xl font-black mb-2 italic">سلامة الغذاء</h3>
+                <h3 class="text-xl font-black mb-2 italic uppercase">سلامة الغذاء</h3>
                 <p class="text-gray-400 text-sm">جميع منتجاتنا مسجلة رسمياً لدى هيئة سلامة الغذاء لضمان نقاء المنتج وصحتك.</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="100">
                 <i class="fas fa-bolt text-4xl text-yellow-500 mb-4"></i>
-                <h3 class="text-xl font-black mb-2 italic">أسرع شحن في مصر</h3>
+                <h3 class="text-xl font-black mb-2 italic uppercase">أسرع شحن في مصر</h3>
                 <p class="text-gray-400 text-sm">نحن ندرك قيمة وقتك؛ لذا نوفر أسرع خدمة توصيل لكل المحافظات وبأرخص سعر.</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="200">
                 <i class="fas fa-hand-holding-usd text-4xl text-yellow-500 mb-4"></i>
-                <h3 class="text-xl font-black mb-2 italic">أرخص الأسعار</h3>
+                <h3 class="text-xl font-black mb-2 italic uppercase">أرخص الأسعار</h3>
                 <p class="text-gray-400 text-sm">نحطم الأسعار لنقدم لك مكملات أصلية 100% بأقل تكلفة ممكنة في السوق المصري.</p>
             </div>
         </div>
     </section>
 
-    <!-- Products Section -->
     <section id="products" class="container mx-auto py-24 px-6">
         <div class="flex items-center gap-4 mb-16" data-aos="fade-left">
             <div class="h-10 w-2 bg-yellow-500"></div>
@@ -79,26 +87,23 @@
         </div>
         <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
 
-        <!-- طلب خاص -->
         <div class="mt-20 bg-yellow-500/5 border border-yellow-500/10 p-8 rounded-[2.5rem] text-center shadow-2xl" data-aos="flip-up">
-            <h3 class="text-2xl font-black text-yellow-500 mb-2">مش لاقي مكمل محدد؟</h3>
+            <h3 class="text-2xl font-black text-yellow-500 mb-2 uppercase">Looking for something specific?</h3>
             <p class="text-gray-400 mb-6 italic text-sm">إذا كنت تبحث عن منتج غير موجود، اضغط تواصل معنا وسنوفر لك ما تحتاجه فوراً.</p>
-            <a href="https://wa.me/201550434880" class="bg-white text-black px-10 py-3 rounded-xl font-black hover:bg-yellow-500 transition">تواصل معنا الآن</a>
+            <a href="https://wa.me/201550434880" target="_blank" class="bg-white text-black px-10 py-3 rounded-xl font-black hover:bg-yellow-500 transition">تواصل معنا الآن</a>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-black py-12 px-6 border-t border-white/5 text-center">
         <div class="flex justify-center gap-8 mb-8 text-2xl">
-            <a href="https://www.tiktok.com/@3dlat_supplements" class="text-gray-500 hover:text-white transition"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.tiktok.com/@3dlat_supplements" target="_blank" class="text-gray-500 hover:text-white transition"><i class="fab fa-tiktok"></i></a>
             <a href="#" class="text-gray-500 hover:text-white transition"><i class="fab fa-instagram"></i></a>
         </div>
-        <p class="text-yellow-500 text-xs font-bold mb-2 uppercase tracking-widest">© 2026 3DLAT STORE | All Rights Reserved</p>
+        <p class="text-yellow-500 text-xs font-bold mb-2 uppercase tracking-widest italic">© 2026 3DLAT STORE | All Rights Reserved</p>
         <p class="text-gray-600 text-[10px] tracking-[4px] uppercase italic">Developed by: Yassin ElSeba3e</p>
     </footer>
 
-    <!-- زر واتساب عائم بالرقم الجديد -->
-    <a href="https://wa.me/201550434880" class="whatsapp-float">
+    <a href="https://wa.me/201550434880" target="_blank" class="whatsapp-float">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -106,14 +111,33 @@
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        const myProducts = [
-            "واي_بروتين_ازجارد_60_جرعة_3500", 
-            "كيفن_لفروني_جولد_واي_66_جرعة_3600",
-            "سيرياس_ماس_اوبتيموم_50_جرعة_4700",
-            "باور_C4_الامريكي_30_جرعة_2200",
-            "كرياتين_اولمكس_الاصلي_60_جرعة_1700",
-            "كرياتين_انابوليك_الامريكي_60_جرعة_1000"
-        ];
+        // تبديل صور الـ Hero كل 1.5 ثانية
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 1500);
+
+        // قائمة المنتجات
+       // استبدل المصفوفة القديمة بهذه القائمة الشاملة لمنتجاتك
+const myProducts = [
+    "كرياتين_انابوليك_الامريكي_60_جرعة_1000",
+    "كرياتين_ازجارد_نوردي_60_جرعة_1000",
+    "باور_C4_الامريكي_30_جرعة_2200",
+    "سيرياس_ماس_اوبتيموم_50_جرعة_4700",
+    "كيفن_لفروني_جولد_واي_66_جرعة_3600",
+    "دي_واي_نيوترشن_كرياتين_60_جرعة_1100",
+    "احماض_امينيه_EAA_بلس_30_جرعة_1300",
+    "دايماتايز_ايزو_100_20_جرعة_2000",
+    "كرياتين_اولمكس_الاصلي_60_جرعة_1700",
+    "كرياتين_ترياكتور_الالماني_180_جرعه_1200",
+    "كرياتين_رول_وان_75_جرعه_1300",
+    "ميز_انرجي_باور_30_جرعة_1200",
+    "نوفوجين_ماس_جينر_50_جرعة_2500"
+     "كرياتين_كريا_جانيك_100_1300",
+];
 
         const container = document.getElementById('product-list');
 
@@ -121,14 +145,14 @@
             let parts = item.split('_');
             let oldPrice = parseInt(parts.pop());
             let name = parts.join(' ');
-            let discount = oldPrice > 1500 ? 50 : 25;
+            let discount = oldPrice > 1500 ? 100 : 50;
             let newPrice = oldPrice - discount;
 
             container.innerHTML += `
                 <div class="product-card p-4 rounded-3xl group flex flex-col" data-aos="fade-up">
                     <div class="absolute top-6 right-6 z-10 flex items-center bg-black/60 px-3 py-1 rounded-full border border-white/10 backdrop-blur-sm">
                         <span class="status-dot dot-online"></span>
-                        <span class="text-[10px] font-black uppercase text-green-400">متوفر</span>
+                        <span class="text-[10px] font-black uppercase text-green-400 italic">In Stock</span>
                     </div>
                     <div class="relative h-72 rounded-2xl overflow-hidden bg-[#0a0a0a] flex items-center justify-center p-6">
                         <img src="${item}.jpg" class="h-full object-contain transform group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/300/111/eab308?text=3DLAT+STORE'">
@@ -139,13 +163,13 @@
                             <div class="flex items-center justify-between mb-4">
                                 <div class="flex flex-col">
                                     <span class="old-price">${oldPrice} EGP</span>
-                                    <span class="text-3xl font-black text-yellow-500">${newPrice} <small class="text-xs font-bold">ج.م</small></span>
+                                    <span class="text-3xl font-black text-yellow-500">${newPrice} <small class="text-xs font-bold italic">ج.م</small></span>
                                 </div>
                                 <div class="bg-yellow-500/10 border border-yellow-500/20 px-3 py-1 rounded-lg">
-                                    <span class="text-yellow-500 text-[10px] font-bold italic">عرض خاص</span>
+                                    <span class="text-yellow-500 text-[10px] font-bold italic uppercase">Offer</span>
                                 </div>
                             </div>
-                            <button onclick="saveAndGo('${name}', '${newPrice}', '${item}.jpg')" class="gradient-btn w-full py-4 rounded-xl font-black shadow-lg transform active:scale-95 transition italic">🛒 اطلب العرض</button>
+                            <button onclick="saveAndGo('${name}', '${newPrice}', '${item}.jpg')" class="gradient-btn w-full py-4 rounded-xl font-black shadow-lg transform active:scale-95 transition italic uppercase">Order Now</button>
                         </div>
                     </div>
                 </div>`;
@@ -155,7 +179,7 @@
             localStorage.setItem('selectedProduct', name);
             localStorage.setItem('selectedPrice', price);
             localStorage.setItem('selectedImg', img);
-            window.location.href = 'product.html'; 
+            window.location.href = 'checkout.html'; 
         }
     </script>
 </body>
