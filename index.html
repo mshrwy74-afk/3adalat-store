@@ -15,12 +15,12 @@
         .product-card:hover { transform: translateY(-10px); border-color: #eab308; }
         .gradient-btn { background: linear-gradient(90deg, #eab308 0%, #ca8a04 100%); color: black; }
         
-        /* استايل السلايدر المطور */
-        .hero-bg { position: relative; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 0.8s ease-in-out; z-index: -1; }
+        /* استايل السلايدر المطور مع إصلاح ظهور النص */
+        .hero-bg { position: relative; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: #000; }
+        .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 0.8s ease-in-out; z-index: 1; }
         .hero-slide.active { opacity: 1; }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)); z-index: 0; }
-        .hero-content { z-index: 10; position: relative; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 2; }
+        .hero-content { z-index: 10; position: relative; text-align: center; }
 
         .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-left: 6px; }
         .dot-online { background-color: #22c55e; box-shadow: 0 0 10px #22c55e; }
@@ -111,7 +111,6 @@
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        // تبديل صور الـ Hero كل 1.5 ثانية
         const slides = document.querySelectorAll('.hero-slide');
         let currentSlide = 0;
         setInterval(() => {
@@ -120,30 +119,29 @@
             slides[currentSlide].classList.add('active');
         }, 1500);
 
-        // قائمة المنتجات
-       // استبدل المصفوفة القديمة بهذه القائمة الشاملة لمنتجاتك
-const myProducts = [
-    "كرياتين_انابوليك_الامريكي_60_جرعة_1000",
-    "كرياتين_ازجارد_نوردي_60_جرعة_1000",
-    "باور_C4_الامريكي_30_جرعة_2200",
-    "سيرياس_ماس_اوبتيموم_50_جرعة_4700",
-    "كيفن_لفروني_جولد_واي_66_جرعة_3600",
-    "دي_واي_نيوترشن_كرياتين_60_جرعة_1100",
-    "احماض_امينيه_EAA_بلس_30_جرعة_1300",
-    "دايماتايز_ايزو_100_20_جرعة_2000",
-    "كرياتين_اولمكس_الاصلي_60_جرعة_1700",
-    "كرياتين_ترياكتور_الالماني_180_جرعه_1200",
-    "كرياتين_رول_وان_75_جرعه_1300",
-    "ميز_انرجي_باور_30_جرعة_1200",
-    "نوفوجين_ماس_جينر_50_جرعة_2500"
-     "كرياتين_كريا_جانيك_100_1300",
-];
+        const myProducts = [
+            "كرياتين_انابوليك_الامريكي_60_جرعة_1000",
+            "كرياتين_ازجارد_نوردي_60_جرعة_1000",
+            "باور_C4_الامريكي_30_جرعة_2200",
+            "سيرياس_ماس_اوبتيموم_50_جرعة_4700",
+            "كيفن_لفروني_جولد_واي_66_جرعة_3600",
+            "دي_واي_نيوترشن_كرياتين_60_جرعة_1100",
+            "احماض_امينيه_EAA_بلس_30_جرعة_1300",
+            "دايماتايز_ايزو_100_20_جرعة_2000",
+            "كرياتين_اولمكس_الاصلي_60_جرعة_1700",
+            "كرياتين_ترياكتور_الالماني_180_جرعه_1200",
+            "كرياتين_رول_وان_75_جرعه_1300",
+            "ميز_انرجي_باور_30_جرعة_1200",
+            "نوفوجين_ماس_جينر_50_جرعة_2500",
+            "كرياتين_كريا_جانيك_100_1300"
+        ];
 
         const container = document.getElementById('product-list');
 
         myProducts.forEach((item) => {
             let parts = item.split('_');
-            let oldPrice = parseInt(parts.pop());
+            let priceStr = parts.pop();
+            let oldPrice = parseInt(priceStr);
             let name = parts.join(' ');
             let discount = oldPrice > 1500 ? 100 : 50;
             let newPrice = oldPrice - discount;
