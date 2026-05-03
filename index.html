@@ -15,7 +15,6 @@
         .product-card:hover { transform: translateY(-10px); border-color: #eab308; }
         .gradient-btn { background: linear-gradient(90deg, #eab308 0%, #ca8a04 100%); color: black; }
         
-        /* استايل السلايدر المطور مع إصلاح ظهور النص */
         .hero-bg { position: relative; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: #000; }
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 0.8s ease-in-out; z-index: 1; }
         .hero-slide.active { opacity: 1; }
@@ -38,7 +37,7 @@
     <nav class="glass-nav fixed w-full z-50 py-4 px-6">
         <div class="container mx-auto flex justify-between items-center">
             <div class="text-3xl font-black text-yellow-500 italic tracking-tighter">3DLAT<span class="text-white">STORE</span></div>
-            <div class="hidden md:flex gap-8 font-bold text-sm uppercase">
+            <div class="hidden md:flex gap-8 font-bold text-sm">
                 <a href="#" class="text-yellow-500">الرئيسية</a>
                 <a href="#about" class="hover:text-yellow-500 transition">لماذا نحن؟</a>
                 <a href="#products" class="hover:text-yellow-500 transition">المتجر</a>
@@ -54,9 +53,9 @@
         <div class="hero-overlay"></div>
 
         <div class="hero-content" data-aos="zoom-in">
-            <h1 class="text-6xl md:text-8xl font-black mb-6 italic uppercase leading-none">تحدى <span class="text-yellow-500">حدودك</span></h1>
+            <h1 class="text-6xl md:text-8xl font-black mb-6 italic leading-none">تحدى <span class="text-yellow-500">حدودك</span></h1>
             <p class="text-xl md:text-2xl text-gray-300 mb-10 font-bold italic">مكملات عالمية أصلية مسجلة بسلامة الغذاء 🛡️</p>
-            <a href="#products" class="gradient-btn font-black px-12 py-4 rounded-full inline-block shadow-lg uppercase tracking-tighter">تسوق العروض الآن</a>
+            <a href="#products" class="gradient-btn font-black px-12 py-4 rounded-full inline-block shadow-lg">تسوق العروض الآن</a>
         </div>
     </section>
 
@@ -64,17 +63,17 @@
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
             <div data-aos="fade-up">
                 <i class="fas fa-certificate text-4xl text-yellow-500 mb-4"></i>
-                <h3 class="text-xl font-black mb-2 italic uppercase">سلامة الغذاء</h3>
+                <h3 class="text-xl font-black mb-2 italic">سلامة الغذاء</h3>
                 <p class="text-gray-400 text-sm">جميع منتجاتنا مسجلة رسمياً لدى هيئة سلامة الغذاء لضمان نقاء المنتج وصحتك.</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="100">
                 <i class="fas fa-bolt text-4xl text-yellow-500 mb-4"></i>
-                <h3 class="text-xl font-black mb-2 italic uppercase">أسرع شحن في مصر</h3>
+                <h3 class="text-xl font-black mb-2 italic">أسرع شحن في مصر</h3>
                 <p class="text-gray-400 text-sm">نحن ندرك قيمة وقتك؛ لذا نوفر أسرع خدمة توصيل لكل المحافظات وبأرخص سعر.</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="200">
                 <i class="fas fa-hand-holding-usd text-4xl text-yellow-500 mb-4"></i>
-                <h3 class="text-xl font-black mb-2 italic uppercase">أرخص الأسعار</h3>
+                <h3 class="text-xl font-black mb-2 italic">أرخص الأسعار</h3>
                 <p class="text-gray-400 text-sm">نحطم الأسعار لنقدم لك مكملات أصلية 100% بأقل تكلفة ممكنة في السوق المصري.</p>
             </div>
         </div>
@@ -88,7 +87,7 @@
         <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
 
         <div class="mt-20 bg-yellow-500/5 border border-yellow-500/10 p-8 rounded-[2.5rem] text-center shadow-2xl" data-aos="flip-up">
-            <h3 class="text-2xl font-black text-yellow-500 mb-2 uppercase">Looking for something specific?</h3>
+            <h3 class="text-2xl font-black text-yellow-500 mb-2">تبحث عن شيء محدد؟</h3>
             <p class="text-gray-400 mb-6 italic text-sm">إذا كنت تبحث عن منتج غير موجود، اضغط تواصل معنا وسنوفر لك ما تحتاجه فوراً.</p>
             <a href="https://wa.me/201550434880" target="_blank" class="bg-white text-black px-10 py-3 rounded-xl font-black hover:bg-yellow-500 transition">تواصل معنا الآن</a>
         </div>
@@ -99,8 +98,8 @@
             <a href="https://www.tiktok.com/@3dlat_supplements" target="_blank" class="text-gray-500 hover:text-white transition"><i class="fab fa-tiktok"></i></a>
             <a href="#" class="text-gray-500 hover:text-white transition"><i class="fab fa-instagram"></i></a>
         </div>
-        <p class="text-yellow-500 text-xs font-bold mb-2 uppercase tracking-widest italic">© 2026 3DLAT STORE | All Rights Reserved</p>
-        <p class="text-gray-600 text-[10px] tracking-[4px] uppercase italic">Developed by: Yassin ElSeba3e</p>
+        <p class="text-yellow-500 text-xs font-bold mb-2 uppercase tracking-widest italic">© 2026 3DLAT STORE | جميع الحقوق محفوظة</p>
+        <p class="text-gray-600 text-[10px] tracking-[4px] uppercase italic">تم التطوير بواسطة: Yassin ElSeba3e</p>
     </footer>
 
     <a href="https://wa.me/201550434880" target="_blank" class="whatsapp-float">
@@ -150,24 +149,24 @@
                 <div class="product-card p-4 rounded-3xl group flex flex-col" data-aos="fade-up">
                     <div class="absolute top-6 right-6 z-10 flex items-center bg-black/60 px-3 py-1 rounded-full border border-white/10 backdrop-blur-sm">
                         <span class="status-dot dot-online"></span>
-                        <span class="text-[10px] font-black uppercase text-green-400 italic">In Stock</span>
+                        <span class="text-[10px] font-black uppercase text-green-400 italic">متوفر</span>
                     </div>
                     <div class="relative h-72 rounded-2xl overflow-hidden bg-[#0a0a0a] flex items-center justify-center p-6">
                         <img src="${item}.jpg" class="h-full object-contain transform group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/300/111/eab308?text=3DLAT+STORE'">
                     </div>
                     <div class="p-6 text-right flex-grow flex flex-col">
-                        <h3 class="text-xl font-black mb-4 uppercase italic tracking-tighter">${name}</h3>
+                        <h3 class="text-xl font-black mb-4 italic tracking-tighter">${name}</h3>
                         <div class="mt-auto border-t border-white/5 pt-4">
                             <div class="flex items-center justify-between mb-4">
                                 <div class="flex flex-col">
-                                    <span class="old-price">${oldPrice} EGP</span>
+                                    <span class="old-price">${oldPrice} ج.م</span>
                                     <span class="text-3xl font-black text-yellow-500">${newPrice} <small class="text-xs font-bold italic">ج.م</small></span>
                                 </div>
                                 <div class="bg-yellow-500/10 border border-yellow-500/20 px-3 py-1 rounded-lg">
-                                    <span class="text-yellow-500 text-[10px] font-bold italic uppercase">Offer</span>
+                                    <span class="text-yellow-500 text-[10px] font-bold italic uppercase">عرض</span>
                                 </div>
                             </div>
-                            <button onclick="saveAndGo('${name}', '${newPrice}', '${item}.jpg')" class="gradient-btn w-full py-4 rounded-xl font-black shadow-lg transform active:scale-95 transition italic uppercase">Order Now</button>
+                            <button onclick="saveAndGo('${name}', '${newPrice}', '${item}.jpg')" class="gradient-btn w-full py-4 rounded-xl font-black shadow-lg transform active:scale-95 transition italic">اطلب الآن</button>
                         </div>
                     </div>
                 </div>`;
